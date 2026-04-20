@@ -1,4 +1,4 @@
-(function () {
+document.addEventListener('DOMContentLoaded', () => {
 
     // ── Floating Hearts Background ──────────────────
     const heartsBg = document.getElementById('heartsBg');
@@ -219,4 +219,4 @@
         });
     });
 
-})();
+});

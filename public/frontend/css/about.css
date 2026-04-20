@@ -1,0 +1,425 @@
+/* ============================================================
+   About Page — HeartSync
+   ============================================================ */
+
+body {
+    background:
+        radial-gradient(ellipse 60% 40% at 0% 0%, rgba(255, 77, 109, 0.13) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 35% at 100% 5%, rgba(255, 179, 107, 0.18) 0%, transparent 55%),
+        linear-gradient(160deg, #fff9f5 0%, #fff5f8 50%, #f8f2ff 100%);
+}
+
+a { color: inherit; text-decoration: none; }
+
+.page-shell {
+    width: min(1280px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 24px 0 80px;
+    display: grid;
+    gap: 22px;
+}
+
+/* ---- Shared utilities ---- */
+.eyebrow {
+    display: block;
+    color: var(--rose-deep);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.btn-primary,
+.btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 26px;
+    border: 0;
+    border-radius: 999px;
+    font: 700 1rem var(--font-body);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    color: #fff;
+    box-shadow: 0 14px 34px rgba(255, 77, 109, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 44px rgba(255, 77, 109, 0.34);
+}
+
+.btn-ghost {
+    background: rgba(31, 34, 50, 0.07);
+    color: var(--ink);
+    transition: background 0.2s ease;
+}
+
+.btn-ghost:hover {
+    background: rgba(31, 34, 50, 0.12);
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.about-hero {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 24px;
+    padding: 52px 48px;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 30px 80px rgba(255, 77, 109, 0.1);
+}
+
+.hero-text h1 {
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4.6vw, 4rem);
+    line-height: 1.02;
+}
+
+.hero-text .lead {
+    margin-top: 18px;
+    max-width: 54ch;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    font-size: 1.04rem;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+/* Hero aside cards */
+.hero-cards {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+}
+
+.info-card {
+    padding: 20px 22px;
+    border-radius: 26px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(31, 34, 50, 0.06);
+}
+
+.featured-card {
+    background: linear-gradient(135deg,
+            rgba(255, 77, 109, 0.06),
+            rgba(255, 179, 107, 0.1));
+    border-color: rgba(255, 77, 109, 0.14);
+}
+
+.mini-cards {
+    display: grid;
+    gap: 10px;
+}
+
+.card-label {
+    display: inline-block;
+    color: var(--rose-deep);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.card-num {
+    display: inline-grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: rgba(255, 77, 109, 0.1);
+    color: var(--rose-deep);
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+}
+
+.info-card strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 1rem;
+}
+
+.info-card p {
+    margin-top: 6px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    font-size: 0.92rem;
+}
+
+/* ============================================================
+   Principles
+   ============================================================ */
+.principles-section {
+    padding: 48px;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 60px rgba(31, 34, 50, 0.08);
+}
+
+.section-header {
+    margin-bottom: 28px;
+}
+
+.section-header h2 {
+    margin-top: 10px;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.08;
+}
+
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.principle-card {
+    padding: 28px 24px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(31, 34, 50, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.principle-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 52px rgba(255, 77, 109, 0.1);
+}
+
+.principle-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+}
+
+.principle-card h3 {
+    font-size: 1.18rem;
+    margin-bottom: 10px;
+}
+
+.principle-card p {
+    color: var(--ink-soft);
+    line-height: 1.72;
+}
+
+/* ============================================================
+   Story + Timeline
+   ============================================================ */
+.story-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 22px;
+}
+
+.story-main,
+.story-timeline {
+    padding: 40px;
+    border-radius: 36px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    box-shadow: 0 20px 60px rgba(31, 34, 50, 0.08);
+}
+
+.story-main h2 {
+    margin-top: 12px;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.1;
+}
+
+.story-main p {
+    margin-top: 14px;
+    color: var(--ink-soft);
+    line-height: 1.78;
+}
+
+.story-main p + p {
+    margin-top: 10px;
+}
+
+/* Timeline */
+.timeline {
+    margin-top: 20px;
+    position: relative;
+    padding-left: 28px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 18px;
+    bottom: 18px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--rose), var(--peach));
+    border-radius: 2px;
+}
+
+.tl-item {
+    position: relative;
+    padding: 18px 0;
+}
+
+.tl-item:not(:last-child) {
+    border-bottom: 1px solid rgba(31, 34, 50, 0.06);
+}
+
+.tl-dot {
+    position: absolute;
+    left: -29px;
+    top: 24px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.15);
+}
+
+.tl-body strong {
+    display: block;
+    font-size: 1.04rem;
+}
+
+.tl-body p {
+    margin-top: 6px;
+    color: var(--ink-soft);
+    line-height: 1.68;
+    font-size: 0.94rem;
+}
+
+/* ============================================================
+   CTA Banner
+   ============================================================ */
+.cta-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    padding: 44px 48px;
+    border-radius: 40px;
+    background: linear-gradient(135deg,
+            rgba(255, 77, 109, 0.07),
+            rgba(255, 179, 107, 0.11));
+    border: 1px solid rgba(255, 77, 109, 0.14);
+    box-shadow: 0 20px 60px rgba(255, 77, 109, 0.08);
+}
+
+.cta-text h2 {
+    margin-top: 10px;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 1.1;
+}
+
+.cta-text p {
+    margin-top: 12px;
+    max-width: 58ch;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+    .about-hero {
+        grid-template-columns: 1fr;
+        padding: 38px 36px;
+    }
+
+    .hero-cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .featured-card {
+        grid-column: 1 / -1;
+    }
+
+    .mini-cards {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .story-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-shell {
+        padding: 14px 0 90px;
+        gap: 16px;
+    }
+
+    .about-hero {
+        padding: 28px 22px;
+        border-radius: 28px;
+        grid-template-columns: 1fr;
+    }
+
+    .hero-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .mini-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .principles-section {
+        padding: 28px 22px;
+        border-radius: 28px;
+    }
+
+    .principles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .story-main,
+    .story-timeline {
+        padding: 28px 22px;
+        border-radius: 28px;
+    }
+
+    .cta-section {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 22px;
+        border-radius: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 2.1rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions a {
+        text-align: center;
+    }
+
+    .br-lg {
+        display: none;
+    }
+}

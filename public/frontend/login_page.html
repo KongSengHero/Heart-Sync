@@ -6,34 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./main.css" />
-    <link rel="stylesheet" href="./components/login/login.css" />
+    <link rel="stylesheet" href="./css/login.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap"
-        rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" />
 </head>
 
-<body class="active">
-    <div id="load_login"></div>
+<body>
+    <section class="login-shell">
+        <div class="login-card">
+            <div class="login-copy">
+                <p class="eyebrow">Welcome Back</p>
+                <h1>Sign in to HeartSync.</h1>
+                <p class="login-subcopy">Use email and password, create a new account, or continue anonymously for
+                    testing.</p>
+            </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-    <script src="../function/firebaseConfig.js"></script>
-    <script src="../function/appInit.js"></script>
-    <script src="../function/hooks.js"></script>
-    <script src="../function/firebaseInit.js"></script>
-    <script src="../function/stateHandler.js"></script>
+            <div class="login-tabs" role="tablist" aria-label="Authentication mode">
+                <button type="button" class="login-tab active" id="signInTab" data-mode="signin">Sign in</button>
+                <button type="button" class="login-tab" id="registerTab" data-mode="register">Create account</button>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <label>
+                    <span>Email</span>
+                    <input type="email" id="loginEmail" name="email" autocomplete="email" placeholder="you@example.com"
+                        required />
+                </label>
+
+                <label>
+                    <span>Password</span>
+                    <input type="password" id="loginPassword" name="password" autocomplete="current-password"
+                        placeholder="At least 6 characters" required minlength="6" />
+                </label>
+
+                <label id="confirmPasswordField" hidden>
+                    <span>Confirm password</span>
+                    <input type="password" id="confirmPassword" autocomplete="new-password"
+                        placeholder="Repeat your password" minlength="6" />
+                </label>
+
+                <button type="submit" class="btn-primary login-submit" id="loginSubmit">Sign in</button>
+                <p class="login-state" id="loginState" aria-live="polite"></p>
+            </form>
+
+            <div class="login-divider"><span>or</span></div>
+
+            <button type="button" class="btn-secondary anon-button" id="anonymousButton">Continue anonymously</button>
+        </div>
+    </section>
+
+
+
+    <script src="../frontend/js/profile.js"></script>
     <script src="../function/loadHTML.js"></script>
-    <script>
-        (async function () {
-            await window.App.firebase.redirectIfAuthenticated('./home_page.html');
-            await loadComponent('./components/login/login.html', 'load_login', './components/login/login.js');
-            finishPageLoad();
-        })();
-    </script>
 </body>
 
 </html>

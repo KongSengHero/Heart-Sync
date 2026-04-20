@@ -1,0 +1,456 @@
+/* ============================================================
+   Profile Page — HeartSync
+   ============================================================ */
+
+:root {
+    --border: rgba(31, 34, 50, 0.1);
+    --card: #1e2035;
+    --card-soft: rgba(255, 255, 255, 0.07);
+}
+
+body {
+    background:
+        radial-gradient(ellipse 55% 40% at 0% 0%, rgba(255, 143, 163, 0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 35% at 100% 8%, rgba(255, 77, 109, 0.14) 0%, transparent 55%),
+        linear-gradient(150deg, #fff8fa 0%, #fff2f5 45%, #f5f0ff 100%);
+}
+
+a { color: inherit; text-decoration: none; }
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+/* ============================================================
+   Layout Shell
+   ============================================================ */
+.page-shell {
+    width: min(1260px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 24px 0 80px;
+}
+
+/* ============================================================
+   Two-Panel Layout
+   ============================================================ */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+    gap: 28px;
+}
+
+.editor-panel,
+.preview-panel {
+    min-width: 0;
+}
+
+/* ============================================================
+   Editor Panel
+   ============================================================ */
+.editor-panel {
+    padding: 36px;
+    border-radius: 36px;
+    background: rgba(255, 255, 255, 0.84);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 26px 80px rgba(31, 34, 50, 0.1);
+}
+
+.eyebrow,
+.notes-label {
+    display: block;
+    color: var(--rose);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.panel-heading h1 {
+    margin-top: 12px;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    line-height: 1.04;
+}
+
+.intro {
+    margin-top: 14px;
+    max-width: 56ch;
+    color: var(--ink-soft);
+    line-height: 1.75;
+}
+
+/* ============================================================
+   Profile Form
+   ============================================================ */
+.profile-form {
+    display: grid;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.field-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.profile-form label,
+.interest-set {
+    display: grid;
+    gap: 8px;
+}
+
+.profile-form span,
+.interest-set legend {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.profile-form input:not([type='checkbox']):not([type='color']),
+.profile-form textarea,
+.profile-form select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-form input:focus,
+.profile-form textarea:focus {
+    border-color: rgba(255, 77, 109, 0.45);
+    box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.1);
+}
+
+.profile-form textarea {
+    resize: vertical;
+    min-height: 116px;
+    line-height: 1.65;
+}
+
+/* Color pickers */
+input[type='color'] {
+    width: 100%;
+    height: 52px;
+    padding: 6px 8px;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    cursor: pointer;
+}
+
+/* Interests fieldset */
+.interest-set {
+    border: 1.5px solid var(--border);
+    padding: 20px 18px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.interest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.interest-list label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1.5px solid rgba(31, 34, 50, 0.06);
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.interest-list label:hover {
+    border-color: rgba(255, 77, 109, 0.3);
+    background: rgba(255, 77, 109, 0.04);
+}
+
+/* Online toggle row */
+.toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: 1.5px solid var(--border);
+    background: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+}
+
+/* Form actions */
+.actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 24px;
+    border: 0;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary {
+    color: #fff;
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    box-shadow: 0 12px 30px rgba(255, 77, 109, 0.28);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(255, 77, 109, 0.34);
+}
+
+.btn-secondary {
+    background: rgba(31, 34, 50, 0.08);
+    color: var(--ink);
+}
+
+.btn-secondary:hover {
+    background: rgba(31, 34, 50, 0.13);
+}
+
+.save-state {
+    min-height: 1.4rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   Preview Panel
+   ============================================================ */
+.preview-stack {
+    display: grid;
+    gap: 20px;
+    position: sticky;
+    top: 100px;
+}
+
+/* Discord-style dark preview card */
+.discord-card {
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(31, 34, 50, 0.22);
+    background: var(--card);
+    color: #fff;
+}
+
+.banner {
+    height: 152px;
+    background: linear-gradient(135deg, #2b2d42, #404663);
+    transition: background 0.3s ease;
+}
+
+.card-body {
+    padding: 0 22px 22px;
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    margin-top: -40px;
+    border: 6px solid var(--card);
+    border-radius: 26px;
+    background: linear-gradient(135deg, var(--rose), #ff7f8d);
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+}
+
+.identity-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.identity-row h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.identity-row p {
+    margin-top: 4px;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.online-badge {
+    flex-shrink: 0;
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: rgba(87, 242, 135, 0.16);
+    color: #6cffa0;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.status-pill {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: var(--card-soft);
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.94rem;
+}
+
+.bio-text {
+    margin-top: 14px;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.72;
+    font-size: 0.93rem;
+}
+
+.meta-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.meta-list div {
+    padding: 14px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.meta-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.76rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.meta-list div strong {
+    font-size: 0.94rem;
+}
+
+.interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.interest-tags span {
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.09);
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.88rem;
+}
+
+/* Notes helper card */
+.notes-card {
+    padding: 24px;
+    border-radius: 26px;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    box-shadow: 0 14px 40px rgba(31, 34, 50, 0.08);
+}
+
+.notes-card h3 {
+    margin-top: 10px;
+    font-size: 1.15rem;
+}
+
+.notes-card p:last-child {
+    margin-top: 8px;
+    color: var(--ink-soft);
+    line-height: 1.72;
+    font-size: 0.93rem;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1040px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-stack {
+        position: static;
+    }
+}
+
+@media (max-width: 720px) {
+    body {
+        padding-bottom: 90px;
+    }
+
+    .page-shell {
+        width: min(100% - 20px, 100%);
+        padding-top: 14px;
+    }
+
+    .editor-panel {
+        padding: 24px 18px;
+        border-radius: 26px;
+    }
+
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .meta-list {
+        grid-template-columns: 1fr;
+    }
+
+    .identity-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .online-badge {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .panel-heading h1 {
+        font-size: 1.9rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .actions .btn-primary,
+    .actions .btn-secondary {
+        text-align: center;
+        justify-content: center;
+    }
+}

@@ -1,36 +1,20 @@
-async function loadComponent(htmlPath, containerId, scriptPath) {
+async function loadComponent(htmlPath, containerId, scriptPath) { 
+    const response = await fetch(htmlPath); 
+    const html = await response.text(); 
     const container = document.getElementById(containerId);
     if (!container) {
-        throw new Error(`Missing container: ${containerId}`);
+        // Container not present on this page — skip injecting this component.
+        return;
     }
+    container.innerHTML = html; 
 
-    const response = await fetch(htmlPath);
-    if (!response.ok) {
-        throw new Error(`Failed to load component ${htmlPath}`);
+    if (scriptPath) { 
+        const script = document.createElement('script'); 
+        script.src = scriptPath; 
+        document.body.appendChild(script); 
     }
-
-    container.innerHTML = await response.text();
-
-    if (!scriptPath) {
-        return container;
-    }
-
-    await new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = scriptPath;
-        script.onload = resolve;
-        script.onerror = reject;
-        document.body.appendChild(script);
-    });
-
-    return container;
 }
 
-function finishPageLoad(delay = 120) {
-    window.setTimeout(() => {
-        document.body.classList.remove('active');
-    }, delay);
-}
-
-window.loadComponent = loadComponent;
-window.finishPageLoad = finishPageLoad;
+// Load Components 
+loadComponent('../frontend/components/navigation.html', 'load_navigation', '../frontend/components/navigation.js'); 
+loadComponent('../frontend/components/footer.html', 'load_footer', '../frontend/components/footer.js'); 
