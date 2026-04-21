@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./main.css" />
     <link rel="stylesheet" href="./css/contact.css" />
 
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet"
@@ -30,17 +31,17 @@
         <!-- ── Info cards ─────────────────────────────── -->
         <div class="contact-info-row">
             <div class="info-card">
-                <div class="info-icon">📍</div>
+                <div class="info-icon"><box-icon type='solid' name='location-plus'></box-icon></div>
                 <h4>Our Location</h4>
                 <p>123 Love Lane, Suite 101<br>Phnom Penh, Cambodia</p>
             </div>
             <div class="info-card">
-                <div class="info-icon">📧</div>
+                <div class="info-icon"><box-icon name='envelope' type='solid' ></box-icon></div>
                 <h4>Email Us</h4>
                 <p>support@heartsync.com<br>hello@heartsync.com</p>
             </div>
             <div class="info-card">
-                <div class="info-icon">📱</div>
+                <div class="info-icon"><box-icon name='phone-call' type='solid' ></box-icon></div>
                 <h4>Call Us</h4>
                 <p>+855 (0) 12 345 678<br>Mon–Fri, 9 am – 6 pm</p>
             </div>
@@ -142,14 +143,15 @@
                     </div>
                 </div>
             </aside>
-
         </div>
     </main>
 
+    <!-- Footer -->
     <div id="load_footer"></div>
 
-    <script src="../function/loadHTML.js"></script>
     <script src="./js/contact.js"></script>
+    <script src="../function/loadHTML.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </body>
 
 </html>

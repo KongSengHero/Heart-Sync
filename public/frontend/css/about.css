@@ -374,11 +374,6 @@ body {
 }
 
 @media (max-width: 768px) {
-    .page-shell {
-        padding: 14px 0 90px;
-        gap: 16px;
-    }
-
     .about-hero {
         padding: 28px 22px;
         border-radius: 28px;
