@@ -834,10 +834,13 @@ button {
     text-align: center;
 }
 
+.testi-viewport {
+    overflow: hidden;
+}
+
 .testimonials-track {
     display: flex;
     gap: 24px;
-    overflow: hidden;
     margin-bottom: 32px;
 }
 
