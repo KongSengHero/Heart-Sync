@@ -47,16 +47,6 @@ body {
         rgba(255, 250, 244, 0.78);
 }
 
-.about-hero::after {
-    content: '';
-    position: absolute;
-    inset: auto auto -80px -60px;
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(24, 32, 51, 0.08), transparent 68%);
-}
-
 .hero-text {
     position: relative;
     z-index: 1;
@@ -228,21 +218,12 @@ body {
     background: rgba(255, 250, 244, 0.92);
     border: 1px solid rgba(24, 32, 51, 0.08);
     box-shadow: var(--shadow-sm);
-    transition:
-        transform 0.28s ease,
-        box-shadow 0.28s ease,
-        border-color 0.28s ease;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
     animation: riseIn 0.34s ease both;
 }
 
-.principle-card:nth-child(1) {
-    animation-delay: 0.02s;
-}
-
-.principle-card:nth-child(2) {
-    margin-top: 28px;
-    animation-delay: 0.08s;
-}
+.principle-card:nth-child(1) { animation-delay: 0.02s; }
+.principle-card:nth-child(2) { margin-top: 28px; animation-delay: 0.08s; }
 
 .principle-card:nth-child(3) {
     animation-delay: 0.14s;
@@ -359,14 +340,4 @@ body {
     }
 }
 
-@keyframes riseIn {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}

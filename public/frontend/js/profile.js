@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const saveState = document.getElementById('saveState');
 	const resetButton = document.getElementById('resetProfile');
 	const imageInput = document.getElementById('profileImageInput');
+	const bannerInput = document.getElementById('bannerImageInput');
 	const avatarPreviewRing = document.getElementById('avatarPreviewRing');
+	const bannerPreviewBox = document.getElementById('bannerPreviewBox');
 
 	const previewAvatarCircle = document.getElementById('avatarPreviewCircle');
 	const previewCardAvatar = document.getElementById('previewAvatar');
@@ -66,7 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			avatarLetter: (baseName.charAt(0) || 'H').toUpperCase(),
 			accent: '#ff4d6d',
 			banner: '#2b2d42',
-			profileImage: ''
+			profileImage: '',
+			bannerImage: ''
 		};
 	}
 
@@ -118,8 +121,23 @@ document.addEventListener('DOMContentLoaded', () => {
 			avatarLetter: (rawLetter || safeName.charAt(0) || 'H').toUpperCase(),
 			accent: (formData.get('accent') || '#ff4d6d').toString(),
 			banner: (formData.get('banner') || '#2b2d42').toString(),
-			profileImage: profileData.profileImage || ''
+			profileImage: profileData.profileImage || '',
+			bannerImage: profileData.bannerImage || ''
 		};
+	}
+
+	function setBannerVisual(data) {
+		if (!bannerPreviewBox) return;
+		if (data.bannerImage) {
+			bannerPreviewBox.style.background = '';
+			bannerPreviewBox.style.backgroundImage = `url('${data.bannerImage}')`;
+			bannerPreviewBox.style.backgroundSize = 'cover';
+			bannerPreviewBox.style.backgroundPosition = 'center';
+			bannerPreviewBox.style.backgroundRepeat = 'no-repeat';
+		} else {
+			bannerPreviewBox.style.backgroundImage = '';
+			bannerPreviewBox.style.background = `linear-gradient(135deg, ${data.banner || '#2b2d42'}, #404663)`;
+		}
 	}
 
 	function renderPreview(data) {
@@ -135,8 +153,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 
 		if (previewBanner) {
-			previewBanner.style.background = `linear-gradient(135deg, ${data.banner}, #404663)`;
+			if (data.bannerImage) {
+				previewBanner.style.background = '';
+				previewBanner.style.backgroundImage = `url('${data.bannerImage}')`;
+				previewBanner.style.backgroundSize = 'cover';
+				previewBanner.style.backgroundPosition = 'center';
+				previewBanner.style.backgroundRepeat = 'no-repeat';
+			} else {
+				previewBanner.style.backgroundImage = '';
+				previewBanner.style.background = `linear-gradient(135deg, ${data.banner}, #404663)`;
+			}
 		}
+		setBannerVisual(data);
 
 		setAvatarVisual(previewAvatarCircle, data.profileImage, data.avatarLetter, data.accent);
 		setAvatarVisual(previewCardAvatar, data.profileImage, data.avatarLetter, data.accent);
@@ -158,9 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		form.elements.status.value = data.status || '';
 		form.elements.location.value = data.location || '';
 		form.elements.bio.value = data.bio || '';
-		form.elements.avatarLetter.value = data.avatarLetter || '';
-		form.elements.accent.value = data.accent || '#ff4d6d';
-		form.elements.banner.value = data.banner || '#2b2d42';
 		form.elements.isOnline.checked = Boolean(data.isOnline);
 
 		form.querySelectorAll('input[name="interests"]').forEach((input) => {
@@ -194,6 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		imageInput?.click();
 	});
 
+	bannerPreviewBox?.addEventListener('click', () => {
+		bannerInput?.click();
+	});
+
 	form.addEventListener('input', () => {
 		const liveData = getFormData();
 		profileData = { ...profileData, ...liveData };
@@ -218,6 +247,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			const liveData = { ...getFormData(), profileImage: imageDataUrl };
 			renderPreview(liveData);
 			setState('Profile picture selected. Save profile to keep it.');
+		};
+		reader.readAsDataURL(file);
+	});
+
+	bannerInput?.addEventListener('change', (event) => {
+		const file = event.target.files?.[0];
+		if (!file) {
+			return;
+		}
+
+		if (!file.type.startsWith('image/')) {
+			setState('Please choose an image file.', true);
+			return;
+		}
+
+		const reader = new FileReader();
+		reader.onload = () => {
+			const imageDataUrl = typeof reader.result === 'string' ? reader.result : '';
+			profileData.bannerImage = imageDataUrl;
+			const liveData = { ...getFormData(), bannerImage: imageDataUrl };
+			renderPreview(liveData);
+			setState('Banner image selected. Save profile to keep it.');
 		};
 		reader.readAsDataURL(file);
 	});

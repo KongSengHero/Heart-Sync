@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./main.css" />
-    <link rel="stylesheet" href="./css/profile.css" />
+    <link rel="stylesheet" href="./main.css?v=59567381" />
+    <link rel="stylesheet" href="./css/profile.css?v=387ec12f" />
 </head>
 
 <body>
@@ -22,37 +22,35 @@
                 <form class="profile-form" id="profileForm">
                     <div class="form-section avatar-section">
                         <div class="avatar-editor">
-                            <div class="avatar-preview-ring" id="avatarPreviewRing">
-                                <div class="avatar-preview" id="avatarPreviewCircle">L</div>
-                                <div class="avatar-overlay" id="avatarOverlay">
-                                    <svg class="avatar-edit-icon" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" />
-                                        <path
-                                            d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
-                                    </svg>
+                            <div class="photo-editors">
+                                <div class="photo-editor-slot">
+                                    <span class="photo-editor-label">Avatar</span>
+                                    <div class="avatar-preview-ring" id="avatarPreviewRing">
+                                        <div class="avatar-preview" id="avatarPreviewCircle">L</div>
+                                        <div class="avatar-overlay" id="avatarOverlay">
+                                            <svg class="avatar-edit-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" />
+                                                <path
+                                                    d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="photo-editor-slot">
+                                    <span class="photo-editor-label">Banner</span>
+                                    <div class="banner-preview-box" id="bannerPreviewBox">
+                                        <div class="banner-preview-overlay">
+                                            <svg class="avatar-edit-icon" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" />
+                                                <path
+                                                    d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                                            </svg>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <input type="file" id="profileImageInput" name="profileImageInput" accept="image/*"
-                                style="display:none;" />
-                            <div class="avatar-editor-fields">
-                                <p class="form-section-label">Your Avatar</p>
-                                <p class="avatar-hint">Hover over the avatar to change the image, or customize it with
-                                    a letter, accent, and banner color.</p>
-                                <div class="avatar-inline-fields">
-                                    <label class="field-inline">
-                                        <span>Letter</span>
-                                        <input type="text" name="avatarLetter" maxlength="1" placeholder="L" />
-                                    </label>
-                                    <label class="field-inline">
-                                        <span>Color</span>
-                                        <input type="color" name="accent" value="#ff4d6d" />
-                                    </label>
-                                    <label class="field-inline">
-                                        <span>Banner</span>
-                                        <input type="color" name="banner" value="#2b2d42" />
-                                    </label>
-                                </div>
-                            </div>
+                            <input type="file" id="profileImageInput" name="profileImageInput" accept="image/*" style="display:none;" />
+                            <input type="file" id="bannerImageInput" name="bannerImageInput" accept="image/*" style="display:none;" />
                         </div>
                     </div>
 
@@ -164,8 +162,8 @@
         </main>
     </div>
 
-    <script src="../frontend/js/profile.js"></script>
-    <script src="../function/loadHTML.js"></script>
+    <script src="../frontend/js/profile.js?v=d5ae6654"></script>
+    <script src="../function/loadHTML.js?v=e5be5d22"></script>
 </body>
 
 </html>

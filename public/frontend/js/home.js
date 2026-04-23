@@ -1,122 +1,97 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ── Floating Hearts Background ──────────────────
-    const heartsBg = document.getElementById('heartsBg');
-    const heartEmojis = ['♥', '❤', '💕', '💗', '💖'];
-    const HEART_COUNT = 18;
+    // ── Helpers ────────────────────────────────────
+    const $ = id => document.getElementById(id);
+    const $$ = (sel, el = document) => el.querySelectorAll(sel);
 
-    for (let i = 0; i < HEART_COUNT; i++) {
-        const el = document.createElement('span');
-        el.classList.add('floating-heart');
-        el.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-        el.style.setProperty('--dur', (6 + Math.random() * 8) + 's');
-        el.style.setProperty('--delay', (Math.random() * 10) + 's');
-        el.style.left = (Math.random() * 100) + '%';
-        el.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
-        heartsBg.appendChild(el);
-    }
+    // ── Floating Hearts ────────────────────────────
+    const hearts = $('heartsBg');
+    if (hearts) {
+        const emojis = ['♥', '❤', '💕', '💗', '💖'];
 
-    // ── Hamburger Menu ──────────────────────────────
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger?.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-    });
-    // Close on link click
-    navLinks?.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => navLinks.classList.remove('open'));
-    });
+        Array.from({ length: 18 }, () => {
+            const el = document.createElement('span');
 
-    // ── Testimonials Slider ─────────────────────────
-    const track = document.getElementById('testimonialsTrack');
-    const dotsWrap = document.getElementById('testiDots');
-    const prevBtn = document.getElementById('testiPrev');
-    const nextBtn = document.getElementById('testiNext');
+            el.className = 'floating-heart';
+            el.textContent = emojis[Math.random() * emojis.length | 0];
 
-    if (track) {
-        const cards = track.querySelectorAll('.testi-card');
-        let current = 0;
-        let autoTimer;
-
-        // Create dots
-        cards.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.classList.add('testi-dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goTo(i));
-            dotsWrap.appendChild(dot);
-        });
-
-        function goTo(idx) {
-            current = (idx + cards.length) % cards.length;
-            // On mobile show 1 card, else 2
-            const perView = window.innerWidth < 768 ? 1 : 2;
-            const cardWidth = cards[0].offsetWidth + 24; // gap = 24px
-            track.style.transform = `translateX(-${current * cardWidth}px)`;
-            dotsWrap.querySelectorAll('.testi-dot').forEach((d, i) => {
-                d.classList.toggle('active', i === current);
+            Object.assign(el.style, {
+                left: Math.random() * 100 + '%',
+                fontSize: (0.8 + Math.random() * 1.2) + 'rem'
             });
-            resetAuto();
-        }
 
-        function resetAuto() {
-            clearInterval(autoTimer);
-            autoTimer = setInterval(() => goTo(current + 1), 4500);
-        }
+            el.style.setProperty('--dur', (6 + Math.random() * 8) + 's');
+            el.style.setProperty('--delay', (Math.random() * 10) + 's');
 
-        prevBtn?.addEventListener('click', () => goTo(current - 1));
-        nextBtn?.addEventListener('click', () => goTo(current + 1));
-        resetAuto();
+            hearts.appendChild(el);
+        });
     }
 
-    // ── Counter Animation ───────────────────────────
-    function animateCounter(el, target, duration = 2000) {
+    // ── Hamburger ──────────────────────────────────
+    const nav = $('navLinks');
+    const hamburger = $('hamburger');
+    if (hamburger && nav) hamburger.onclick = () => nav.classList.toggle('open');
+    if (nav) $$('a', nav).forEach(a => a.onclick = () => nav.classList.remove('open'));
+
+    // ── Testimonials ───────────────────────────────
+    const track = $('testimonialsTrack');
+    if (track) {
+        const cards = $$('.testi-card', track);
+        const dots = $('testiDots');
+        let i = 0, timer;
+        const go = n => {
+            i = (n + cards.length) % cards.length;
+
+            const w = cards[0].offsetWidth + 24;
+            track.style.transform = `translateX(-${i * w}px)`;
+
+            $$('.testi-dot', dots).forEach((d, idx) =>
+                d.classList.toggle('active', idx === i)
+            );
+
+            clearInterval(timer);
+            timer = setInterval(() => go(i + 1), 4500);
+        };
+
+        cards.forEach((_, idx) => {
+            const d = document.createElement('div');
+            d.className = 'testi-dot' + (idx === 0 ? ' active' : '');
+            d.onclick = () => go(idx);
+            dots.appendChild(d);
+        });
+        const prev = $('testiPrev');
+        const next = $('testiNext');
+        if (prev) prev.onclick = () => go(i - 1);
+        if (next) next.onclick = () => go(i + 1);
+        go(0);
+    }
+
+    // ── Counter ────────────────────────────────────
+    const animate = (el, target, dur = 2000) => {
         const start = performance.now();
-        const startVal = 0;
-        const isLarge = target > 999;
+        const large = target > 999;
 
-        function tick(now) {
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const current = Math.round(startVal + (target - startVal) * eased);
-
-            if (isLarge) { el.textContent = current.toLocaleString(); }
-            else { el.textContent = current; }
-
-            if (progress < 1) requestAnimationFrame(tick);
-            else el.textContent = isLarge ? target.toLocaleString() : target;
+        const tick = now => {
+            const p = Math.min((now - start) / dur, 1);
+            const val = Math.round(target * (1 - (1 - p) ** 3));
+            el.textContent = large ? val.toLocaleString() : val;
+            p < 1
+                ? requestAnimationFrame(tick)
+                : el.textContent = large ? target.toLocaleString() : target;
         }
         requestAnimationFrame(tick);
     }
 
-    // Intersection Observer for stats
-    const statNums = document.querySelectorAll('.stats-num[data-target]');
-    if (statNums.length) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseInt(el.dataset.target, 10);
-                    animateCounter(el, target);
-                    observer.unobserve(el);
-                }
-            });
-        }, { threshold: 0.4 });
+    const observe = (els, cb, t = 0.4) => {
+        const obs = new IntersectionObserver(e =>
+            e.forEach(x => x.isIntersecting && (cb(x.target), obs.unobserve(x.target)))
+            , { threshold: t });
 
-        statNums.forEach(el => observer.observe(el));
-    }
+        els.forEach(el => obs.observe(el));
+    };
 
-    // Animate the feature stat card counter
-    const counterEl = document.getElementById('counterMatches');
-    if (counterEl) {
-        const obs = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                animateCounter(counterEl, 247, 1800);
-                obs.unobserve(counterEl);
-            }
-        }, { threshold: 0.5 });
-        obs.observe(counterEl);
-    }
+    observe($$('.stats-num[data-target]'), el => animate(el, +el.dataset.target));
+
+    const counter = $('counterMatches');
+    if (counter) observe([counter], () => animate(counter, 247, 1800), 0.5);
 })

@@ -24,27 +24,6 @@ body {
     color: var(--color-text-inverse);
 }
 
-.auth-brand::before {
-    content: '';
-    position: absolute;
-    inset: 12% -80px auto auto;
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(239, 91, 63, 0.26), transparent 66%);
-    filter: blur(12px);
-}
-
-.auth-brand::after {
-    content: '';
-    position: absolute;
-    inset: auto auto -120px -80px;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 248, 241, 0.08), transparent 66%);
-}
-
 .auth-logo {
     position: relative;
     z-index: 1;
@@ -169,9 +148,6 @@ body {
     text-transform: uppercase;
 }
 
-.auth-stat-divider {
-    display: none;
-}
 
 .auth-panel {
     display: grid;
@@ -239,11 +215,7 @@ body {
     color: var(--color-text-muted);
     font-size: 0.88rem;
     font-weight: 800;
-    transition:
-        transform 0.24s ease,
-        background-color 0.24s ease,
-        color 0.24s ease,
-        box-shadow 0.24s ease;
+    transition: transform 0.24s ease, background-color 0.24s ease, color 0.24s ease, box-shadow 0.24s ease;
 }
 
 .auth-tab.active {
@@ -277,10 +249,7 @@ body {
     background: rgba(255, 250, 244, 0.94);
     color: var(--color-primary);
     outline: none;
-    transition:
-        border-color 0.24s ease,
-        box-shadow 0.24s ease,
-        background-color 0.24s ease;
+    transition: border-color 0.24s ease, box-shadow 0.24s ease, background-color 0.24s ease;
 }
 
 .auth-field input:focus {
@@ -312,11 +281,7 @@ body {
     border-radius: 20px;
     font-size: 0.94rem;
     font-weight: 800;
-    transition:
-        transform 0.24s ease,
-        box-shadow 0.24s ease,
-        background-color 0.24s ease,
-        border-color 0.24s ease;
+    transition: transform 0.24s ease, box-shadow 0.24s ease, background-color 0.24s ease, border-color 0.24s ease;
 }
 
 .btn-auth-primary {
@@ -345,14 +310,6 @@ body {
     position: relative;
     margin: 22px 0;
     text-align: center;
-}
-
-.auth-divider::before {
-    content: '';
-    position: absolute;
-    inset: 50% 0 auto;
-    height: 1px;
-    background: rgba(24, 32, 51, 0.1);
 }
 
 .auth-divider span {
